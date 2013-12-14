@@ -240,7 +240,7 @@ package org.flixel
 			var tw:Number = _tiles.width;	var th:Number = _tiles.height;
 			bmp.width = tw * scale;
 			bmp.height = th * scale;
-			trace(bmp.width + ", " + bmp.height);
+		//	trace(bmp.width + ", " + bmp.height);
 			_tiles = bmp.bitmapData;
 			
 			_tileWidth = TileWidth;
