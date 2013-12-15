@@ -2,46 +2,31 @@
 <project>
   <version>3.1.5</version>
   <bgColor>0x777777</bgColor>
-  <viewPos x="148" y="-2"/>
+  <viewPos x="249" y="268"/>
   <firstLayersTop>false</firstLayersTop>
   <spriteEntries currentId="1"/>
   <layers>
-    <group name="map1" id="0" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true">
-      <maplayer name="collidable" id="0" xScroll="1" yScroll="1" x="0" y="0" width="20" height="20" tileset="../gfx/tiles/collidable_map_tiles_32x32.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,18</row>
-        <row>15,15,15,17,15,18,15,15,16,15,15,18,15,15,15,16,15,15,15,15</row>
-        <row>15,16,15,15,15,15,15,15,15,17,15,18,15,15,15,15,15,15,15,15</row>
-        <row>15,15,17,15,15,15,15,15,0,0,0,0,15,17,15,15,15,15,16,15</row>
-        <row>15,15,15,15,15,15,15,0,0,0,0,0,0,0,0,15,15,15,15,18</row>
-        <row>17,15,15,15,15,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15</row>
-        <row>15,18,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,15,16</row>
-        <row>15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15</row>
-        <row>15,0,0,0,0,0,0,0,20,20,20,20,0,0,0,0,0,0,0,15</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12</row>
-        <row>12,0,0,0,0,0,0,0,0,14,14,14,14,0,0,0,0,0,0,12</row>
-        <row>12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12</row>
+    <group name="map1" id="0" xScroll="1" yScroll="1" visible="true" open="true" locked="false" exports="true" selected="true">
+      <maplayer name="collidable" id="0" xScroll="1" yScroll="1" x="0" y="0" width="26" height="10" tileset="../gfx/tiles/collidable_map_tiles_32x32.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17</row>
+        <row>9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>7,0,0,0,0,0,0,0,0,0,0,15,15,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>8,0,0,0,0,0,0,0,0,0,0,15,17,0,0,0,0,0,0,0,0,0,0,0,0,15</row>
+        <row>7,5,6,5,2,2,3,5,4,6,6,15,15,15,15,16,18,15,15,17,17,15,15,15,15,15</row>
+        <row>8,9,8,7,10,11,8,9,7,7,7,17,15,15,17,15,15,16,15,18,15,15,18,15,15,15</row>
       </maplayer>
-      <maplayer name="interactable" id="1" xScroll="1" yScroll="1" x="0" y="0" width="10" height="10" tileset="../gfx/tiles/interactable_map_tiles_64x64.png" tileWidth="64" tileHeight="64" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="64" tileSpacingY="64" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,1,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0</row>
+      <maplayer name="interactable" id="1" xScroll="1" yScroll="1" x="0" y="0" width="13" height="5" tileset="../gfx/tiles/interactable_map_tiles_64x64.png" tileWidth="64" tileHeight="64" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="64" tileSpacingY="64" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,1,0</row>
+        <row>0,0,0,0,0,0,0,0,0,0,0,0,0</row>
       </maplayer>
-      <maplayer name="hazard" id="2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="20" tileset="../gfx/tiles/hazard_map_tiles_32x32.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false" selected="true">
+      <maplayer name="hazard" id="2" xScroll="1" yScroll="1" x="0" y="0" width="20" height="10" tileset="../gfx/tiles/hazard_map_tiles_32x32.png" tileWidth="32" tileHeight="32" visible="true" hasHits="false" drawIdx="1" collideIdx="1" eraseIdx="0" locked="false" exports="true" tileSpacingX="32" tileSpacingY="32" xStagger="0" tileOffsetX="0" tileOffsetY="0" isMaster="false" mapType="2d" hasHeight="false" repeatX="false" repeatY="false">
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
@@ -51,16 +36,6 @@
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
-        <row>0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,0</row>
         <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
       </maplayer>
     </group>

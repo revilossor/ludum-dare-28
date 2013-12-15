@@ -1,5 +1,10 @@
 package  
 {
+	import collectable.BulletPowerup;
+	import collectable.GunPowerup;
+	import hazard.Flybot;
+	import hazard.Pushbot;
+	import hazard.Spike;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
@@ -12,6 +17,8 @@ package
 	{
 		private var _tiles:FlxTilemap;
  		private var _hazards:FlxGroup;
+		private var _collectables:FlxGroup;
+		
 		private var _redDoor:FlxSprite;
 		private var _greenDoor:FlxSprite;
 		private var _blueDoor:FlxSprite;
@@ -65,9 +72,9 @@ package
 			
 			_hazards = new FlxGroup();
 			
-			var hazard:String = new Res.hazard_maps[map];
+			var haazard:String = new Res.hazard_maps[map];
 			
-			var hazardData:Array = hazard.split(/\r\n|\n|\r/);
+			var hazardData:Array = haazard.split(/\r\n|\n|\r/);
 			for (var h:int = 0; h < hazardData.length; h++) {
 				hazardData[h] = hazardData[h].split(",");
 			}
@@ -77,16 +84,49 @@ package
 				for (var nummx:int = 0; nummx < widthInTiles; nummx++) {
 					if (hazardData[nummy][nummx] == 1) { 
 						for (var s:uint = 0; s < 8; s++) {
-							var newspike:FlxSprite = new FlxSprite(drawx + s * 4, drawy + 27);
-							newspike.loadGraphic(Res.spike, false, false, 4, 5);
-							newspike.immovable = true;
+							var newspike:Spike = new Spike(drawx + s * 4, drawy + 27);
 							_hazards.add(newspike);
 						}
+					}
+					if (hazardData[nummy][nummx] == 2) { 
+						var newpushbot:Pushbot = new Pushbot(drawx, drawy);
+						_hazards.add(newpushbot);
+					}
+					if (hazardData[nummy][nummx] == 3) { 
+						var newflybot:Flybot = new Flybot(drawx, drawy);
+						_hazards.add(newflybot);
 					}
 					drawx += 32;
 				}
 				drawx = 0;
 				drawy += 32;
+			}
+			
+			_collectables = new FlxGroup();
+			if(Res.collect_maps[map] != null){
+				var collect:String = new Res.collect_maps[map];
+				
+				var collectData:Array = collect.split(/\r\n|\n|\r/);
+				for (var c:int = 0; c < collectData.length; c++) {
+					collectData[c] = collectData[c].split(",");
+				}
+				drawx = 0; drawy = 0;
+					
+				for (var nummmy:int = 0; nummmy < heightInTiles*2; nummmy++) {
+					for (var nummmx:int = 0; nummmx < widthInTiles*2; nummmx++) {
+						if (collectData[nummmy][nummmx] == 1) {
+							var gun:GunPowerup = new GunPowerup(drawx, drawy);
+							_collectables.add(gun);
+						}
+						if (collectData[nummmy][nummmx] == 2) { //gun
+							var bullet:BulletPowerup = new BulletPowerup(drawx, drawy);
+							_collectables.add(bullet);
+						}
+						drawx += 16;
+					}
+					drawx = 0;
+					drawy += 16;
+				}
 			}
 		}
 		public function get width():uint {				return _tiles.width;		}
@@ -96,6 +136,7 @@ package
 		public function get greenDoor():FlxSprite {		return _greenDoor;			}
 		public function get blueDoor():FlxSprite {		return _blueDoor;			}
 		public function get hazards():FlxGroup {		return _hazards;			}
+		public function get collectables():FlxGroup {	return _collectables;		}
 	}
 
 }

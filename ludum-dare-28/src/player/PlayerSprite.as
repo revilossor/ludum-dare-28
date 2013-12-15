@@ -10,6 +10,8 @@ package player
 	public class PlayerSprite extends FlxSprite
 	{
 
+		public var onGround:Boolean = false;
+		
 		public function PlayerSprite(xp:uint, yp:uint) 
 		{
 			super(xp, yp);
@@ -27,6 +29,11 @@ package player
 			super.update();
 			animationHandling();
 			keyHandling();
+			if (isTouching(FlxObject.FLOOR)) {
+				onGround = true;
+			}else {
+				onGround = false;
+			}
 		}
 		private function keyHandling():void
 		{
@@ -40,10 +47,10 @@ package player
 				!Player.gunShowing?play("jump"):play("shoot");
 			}else if (velocity.y > 50) {
 				!Player.gunShowing?play("fall"):play("shoot");
-			}else if (velocity.x > 20 && isTouching(FlxObject.FLOOR)) {
+			}else if (velocity.x > 0 && isTouching(FlxObject.FLOOR)) {
 				facing = RIGHT;
 				!Player.gunShowing?play("walk"):play("shootWalk");
-			}else if(velocity.x < -20 && isTouching(FlxObject.FLOOR)){
+			}else if(velocity.x < 0 && isTouching(FlxObject.FLOOR)){
 				facing = LEFT;
 				!Player.gunShowing?play("walk"):play("shootWalk");
 			}else{

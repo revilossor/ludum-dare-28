@@ -19,7 +19,9 @@ package hud
 			_ammoText = new FlxText(0, 0, 720, "ammo : " + FlxG.gameData.ammo);
 			_ammoText.setFormat(null, 16, 0xfffffc00, "left", 0xffccc900);
 			_ammoText.scrollFactor.x = _ammoText.scrollFactor.y = 0;
-			add(_ammoText);
+			if(FlxG.gameData.hasGun){
+				add(_ammoText);
+			}
 		}
 		override public function update():void
 		{
@@ -33,6 +35,10 @@ package hud
 			
 			
 		}
+		public function addAmmoText():void
+		{
+			add(_ammoText);
+		}
 		private function updateTextBoxes():void
 		{
 			for (var t:uint = 0; t < _textBoxes.length; t++) {
@@ -42,7 +48,7 @@ package hud
 				}
 			}
 		}
-		public function showMessage(xp:uint, yp:uint, message:String, duration:uint):void
+		public function showMessage(xp:int, yp:int, message:String, duration:uint):void
 		{
 			_textBoxes.add(new HudText(xp, yp, message, duration));
 		}

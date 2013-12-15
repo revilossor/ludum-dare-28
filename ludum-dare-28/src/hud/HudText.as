@@ -10,10 +10,11 @@ package hud
 	{
 		private var _lifetime:int; 
 		
-		public function HudText(xp:uint, yp:uint, message:String, duration:uint) 
+		public function HudText(xp:int, yp:int, message:String, duration:uint) 
 		{
 			_lifetime = duration;
-			var text:FlxText = new FlxText(xp, yp, 100, message);
+			trace("messsage at : " + xp + ", "+yp);
+			var text:FlxText = new FlxText(xp, yp, 200, message);
 			text.setFormat(null, 16, 0xff9400, "center", 0xffa66000);
 			text.scrollFactor.x = text.scrollFactor.y = 0;
 			add(text);
