@@ -30,14 +30,17 @@ package player
 			animationHandling();
 			keyHandling();
 			if (isTouching(FlxObject.FLOOR)) {
+				if (!onGround) { FlxG.play(Res.land); }
 				onGround = true;
 			}else {
 				onGround = false;
 			}
+			
 		}
 		private function keyHandling():void
 		{
-			if (FlxG.keys.justPressed("UP")&& isTouching(FlxObject.FLOOR)) {
+			if (FlxG.keys.justPressed("UP") && isTouching(FlxObject.FLOOR)) {
+				FlxG.play(Res.jump, 0.05);
 				velocity.y -= Player.JUMP_STRENGTH;
 			}
 		}

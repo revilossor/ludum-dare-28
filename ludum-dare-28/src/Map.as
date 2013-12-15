@@ -2,6 +2,8 @@ package
 {
 	import collectable.BulletPowerup;
 	import collectable.GunPowerup;
+	import hazard.Cruisebot;
+	import hazard.Deathblock;
 	import hazard.Flybot;
 	import hazard.Pushbot;
 	import hazard.Spike;
@@ -95,6 +97,14 @@ package
 					if (hazardData[nummy][nummx] == 3) { 
 						var newflybot:Flybot = new Flybot(drawx, drawy);
 						_hazards.add(newflybot);
+					}
+					if (hazardData[nummy][nummx] == 4) { 
+						var newcruisebot:Cruisebot = new Cruisebot(drawx, drawy);
+						_hazards.add(newcruisebot);
+					}
+					if (hazardData[nummy][nummx] == 5) { 
+						var newdeathblock:Deathblock = new Deathblock(drawx, drawy);
+						_hazards.add(newdeathblock);
 					}
 					drawx += 32;
 				}

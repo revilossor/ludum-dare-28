@@ -75,14 +75,8 @@ package player
 			FlxG.gameData.ammo = 1;
 			_bullet.visible = false;
 			_bullet.deactivateGravity();
+			FlxG.play(Res.pickupBullet);
 		}
-	/*	public function collectCollectables(p:FlxObject, pow:FlxObject):void
-		{
-			if (pow is GunPowerup) {
-				trace("collect gun");
-				
-			}
-		}*/
 		private function shootHandling():void
 		{
 			if (shootTimer > 0) {
@@ -116,12 +110,14 @@ package player
 				trace("canright: " + canShootRight + ", can left: " + canShootLeft);
 				_bullet.justSpawned = true;
 				if (_sprite.facing == FlxObject.RIGHT && canShootRight) {
+					FlxG.play(Res.shoot, 0.1);
 					_bullet.x = _sprite.x + 37;
 					_bullet.y = _gun.y;
 					_bullet.velocity = new FlxPoint(sprite.velocity.x + 300, 0);
 					_bullet.visible = true;
 					FlxG.gameData.ammo = 0;
-				}else if(_sprite.facing==FlxObject.LEFT&&canShootLeft){
+				}else if (_sprite.facing == FlxObject.LEFT && canShootLeft) {
+					FlxG.play(Res.shoot, 0.1);
 					_bullet.x = _gun.x -9;
 					_bullet.y = _gun.y;
 					_bullet.velocity = new FlxPoint(sprite.velocity.x - 300, 0);

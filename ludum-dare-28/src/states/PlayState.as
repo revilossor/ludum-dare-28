@@ -3,6 +3,11 @@ package states
 	import collectable.BulletPowerup;
 	import collectable.GunPowerup;
 	import flash.filters.ConvolutionFilter;
+	import hazard.Cruisebot;
+	import hazard.Deathblock;
+	import hazard.Flybot;
+	import hazard.Hazard;
+	import hazard.Pushbot;
 	import hazard.Spike;
 	import hud.Hud;
 	import org.flixel.FlxCamera;
@@ -42,6 +47,7 @@ package states
 			_hazards = _map.hazards;
 			_collectables = _map.collectables;
 			_particles = new FlxGroup();
+			FlxG.bgColor = 0xff000000;
 		}
 		override public function create():void
 		{
@@ -52,10 +58,10 @@ package states
 			add(_redDoor);
 			add(_greenDoor);
 			add(_blueDoor);
+			add(_particles);
 			add(_player);
 			add(_hazards);
 			add(_collectables);
-			add(_particles);
 			add(_hud);
 			
 			FlxG.camera.setBounds(0, 0, _map.width, _map.height);
@@ -74,11 +80,26 @@ package states
 										Res.tutorialMessages[FlxG.gameData.currentLevel], 
 											90);
 			}
+			if (FlxG.gameData.currentLevel == 16) {
+				_hud.showMessage(_player.sprite.getScreenXY().x + 50, 
+									_player.sprite.getScreenXY().y - 200, 
+										"press space\nto return to menu", 
+											200);
+			}
 		}
 		override public function update():void
 		{
 			super.update();
 			handleCollision();
+			if (FlxG.gameData.currentLevel == 16) {
+				if (FlxG.keys.justReleased("SPACE")) {
+					FlxG.fade(0xff000000, 2, gotoMenuState);
+				}
+			}
+		}
+		private function gotoMenuState():void
+		{
+			FlxG.switchState(new MenuState());
 		}
 		private function handleCollision():void
 		{
@@ -97,15 +118,33 @@ package states
 			FlxG.collide(_particles, _map);
 			FlxG.collide(_hazards, _map);
 			FlxG.overlap(_player.bullet, _hazards, bulletHitHazard);
+			FlxG.overlap(_hazards, _hazards, hazardOverHazard);
+		}
+		private function hazardOverHazard(h:Hazard, o:Hazard):void
+		{
+			if ((h is Deathblock && o is Pushbot) || (h is Pushbot && o is Deathblock)) {
+				FlxObject.separateY(h, o);
+			}
+			if ((h is Deathblock && o is Cruisebot) || (h is Cruisebot && o is Deathblock)) {
+				FlxObject.separateX(h, o);
+			}
+			if ((h is Deathblock && o is Flybot) || (h is Deathblock && o is Flybot)) {
+				FlxObject.separateY(h, o);
+			}
 		}
 		private function bulletHitMap(b:Bullet, m:FlxObject):void
 		{
 			b.weaponised = false;
+			if (b.wasTouching == FlxObject.FLOOR) { trace("dont play ths time"); return;}
+			FlxG.play(Res.bulletwall);
 		}
 		private function bulletHitHazard(b:Bullet, h:FlxObject):void
 		{
 			if (!b.weaponised) { trace("not weaponised"); return; }
 			if (h is Spike) { return; }
+			FlxG.play(Res.enemydie);
+			FlxG.flash(0xffff0000, 0.3);
+			FlxObject.separateX(b, h);
 			spawnParticles(h.getMidpoint().x, h.getMidpoint().y, 10, 0x77880000);
 			_hazards.remove(h, true);
 			h.destroy();
@@ -121,14 +160,16 @@ package states
 				spawnParticles(pow.getMidpoint().x, pow.getMidpoint().y, 50, 0x77ffffff);
 				FlxG.gameData.hasGun = true;
 				_hud.addAmmoText();
+				FlxG.play(Res.gunget, 0.3);
 			}
 			if (pow is BulletPowerup) {
 				_hud.showMessage(_player.sprite.getScreenXY().x-150, 
 									_player.sprite.getScreenXY().y-50, 
-										"Bullet Get!\nyou can reuse it", 
+										"Bullet Get!\nyou can reuse it\npress space to shoot", 
 											80);
 				spawnParticles(pow.getMidpoint().x, pow.getMidpoint().y, 50, 0x77ffffff);
 				FlxG.gameData.ammo = 1;
+				FlxG.play(Res.bulletget, 0.5);
 			}
 	//		_player.collectCollectables(p, pow);
 			_collectables.remove(pow, true);
@@ -143,6 +184,7 @@ package states
 								_player.sprite.getMidpoint().y,
 									30, 0xffff0000 );
 			_player.kill();
+			FlxG.play(Res.playerdie, 0.2);
 			FlxG.fade(0xffff0000, 2, gotoDeathState);
 		}
 		private function playerHitHazard(p:FlxObject, h:FlxObject):void
@@ -150,9 +192,13 @@ package states
 			if (h is Spike) {
 				if (!(h.isTouching(FlxObject.LEFT)||h.isTouching(FlxObject.RIGHT))) {
 					playerDie(p, h);
+					FlxG.flash(0xffff0000, 0.3);
+					FlxG.shake();
 				}
 			}else {
 				playerDie(p, h);
+				FlxG.flash(0xffff0000, 0.3);
+				FlxG.shake();
 			}
 		}
 		private function spawnParticles(xp:uint, yp:uint, num:uint, col:uint):void
@@ -176,6 +222,7 @@ package states
 				_redDoor.allowCollisions = FlxObject.NONE;
 				_player.exists = false;
 				_nextRoom = getConnecton("red");
+				FlxG.play(Res.door);
 				FlxG.fade(0xff000000, 1, gotoNextRoom);
 			}
 		}
@@ -183,6 +230,7 @@ package states
 		{
 			if (_greenDoor == null) { trace("weird green door bug here...."); return; }
 			if (FlxG.keys.justReleased("DOWN")) {
+				FlxG.play(Res.door);
 				_greenDoor.allowCollisions = FlxObject.NONE;
 				_player.exists = false;
 				_nextRoom = getConnecton("green");
@@ -192,6 +240,7 @@ package states
 		private function playerOverBlueDoor(pl:FlxObject, dr:FlxObject):void
 		{
 			if (FlxG.keys.justReleased("DOWN")) {
+				FlxG.play(Res.door);
 				_blueDoor.allowCollisions = FlxObject.NONE;
 				_player.exists = false;
 				_nextRoom = getConnecton("blue");

@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\ludumdare28.swf" />
+    <movie path="bin\oneshot.swf" />
     <movie fps="30" />
     <movie width="720" />
     <movie height="440" />

@@ -1,6 +1,7 @@
 package states 
 {
 	import org.flixel.FlxG;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	/**
 	 * ...
@@ -14,8 +15,9 @@ package states
 		override public function create():void
 		{
 			super.create();
-			FlxG.bgColor = 0xffff0000;
-			FlxG.gameData = new GameData();
+			FlxG.playMusic(Res.menu_bgm);
+			
+			add(new FlxSprite(0, 0, Res.menu_bg));
 		}
 		override public function update():void
 		{
@@ -25,10 +27,15 @@ package states
 		private function keyHandling():void
 		{
 			if (FlxG.keys.justReleased("SPACE")) {
+				FlxG.play(Res.click);
 				FlxG.fade(0xff000000, 1, gotoPlayState);
 			}
 		}
-		private function gotoPlayState():void { FlxG.switchState(new PlayState(FlxG.gameData.currentLevel));} 
+		private function gotoPlayState():void 
+		{
+			FlxG.pauseSounds();
+			FlxG.switchState(new PlayState(FlxG.gameData.currentLevel));
+		} 
 	}
 
 }

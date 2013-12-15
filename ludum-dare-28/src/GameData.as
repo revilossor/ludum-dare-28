@@ -6,7 +6,7 @@ package
 	 */
 	public class GameData 
 	{
-		private var _currentLevel:uint = 6;
+		private var _currentLevel:uint = 0;
 		private var _ammo:uint = 0;
 		private var _hasGun:Boolean = false;
 		
